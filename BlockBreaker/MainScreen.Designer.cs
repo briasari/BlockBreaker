@@ -28,35 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.originalButton = new System.Windows.Forms.Button();
-            this.powerUpButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
+            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // originalButton
+            // playButton
             // 
-            this.originalButton.Location = new System.Drawing.Point(229, 273);
-            this.originalButton.Name = "originalButton";
-            this.originalButton.Size = new System.Drawing.Size(200, 50);
-            this.originalButton.TabIndex = 0;
-            this.originalButton.Text = "original";
-            this.originalButton.UseVisualStyleBackColor = true;
+            this.playButton.Location = new System.Drawing.Point(214, 311);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(200, 50);
+            this.playButton.TabIndex = 0;
+            this.playButton.Text = "play";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
-            // powerUpButton
+            // exitButton
             // 
-            this.powerUpButton.Location = new System.Drawing.Point(229, 416);
-            this.powerUpButton.Name = "powerUpButton";
-            this.powerUpButton.Size = new System.Drawing.Size(200, 50);
-            this.powerUpButton.TabIndex = 1;
-            this.powerUpButton.Text = "power up";
-            this.powerUpButton.UseVisualStyleBackColor = true;
+            this.exitButton.Location = new System.Drawing.Point(497, 578);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(75, 23);
+            this.exitButton.TabIndex = 1;
+            this.exitButton.Text = "exit";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.powerUpButton);
-            this.Controls.Add(this.originalButton);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.playButton);
             this.Name = "MainScreen";
             this.Size = new System.Drawing.Size(650, 750);
             this.ResumeLayout(false);
@@ -65,7 +67,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button originalButton;
-        private System.Windows.Forms.Button powerUpButton;
+        private System.Windows.Forms.Button playButton;
+        private System.Windows.Forms.Button exitButton;
     }
 }
