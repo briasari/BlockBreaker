@@ -30,7 +30,7 @@ namespace BlockBreaker
                 xSpeed = -xSpeed;
             }
 
-            if (y < 0 && y > GameScreen.screenHeight - size)
+            if (y < 0 || y > GameScreen.screenHeight - size)
             {
                 ySpeed = -ySpeed;
             }

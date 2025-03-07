@@ -16,6 +16,8 @@ namespace BlockBreaker
         List<Ball> balls = new List<Ball>();
         Ball chaseBall;
 
+        List<Brick> bricks = new List<Brick>();
+
         Player hero;
 
         public static int screenWidth;
@@ -24,7 +26,6 @@ namespace BlockBreaker
 
         Random randGen = new Random();
         SolidBrush goldRodBrush = new SolidBrush(Color.Goldenrod);
-        SolidBrush redBrush = new SolidBrush(Color.Red);
 
 
         public static int points;
@@ -33,6 +34,14 @@ namespace BlockBreaker
         {
             InitializeComponent();
 
+            screenWidth = this.Width;
+            screenHeight = this.Height;
+
+            InitializeGame();
+        }
+
+        public void InitializeGame()
+        {
             hero = new Player();
 
             int x = randGen.Next(20, this.Width - 50);
@@ -53,8 +62,8 @@ namespace BlockBreaker
 
         private void CreateBall()
         {
-            int x = randGen.Next(20, this.Width - 50);
-            int y = randGen.Next(20, this.Height - 50);
+            int x = this.Width;
+            int y = randGen.Next(200, this.Height - 335);
 
             Ball b = new Ball(x, y, 8, 8);
             balls.Add(b);
@@ -83,6 +92,10 @@ namespace BlockBreaker
 
             #endregion
 
+            if (hero.Collision(chaseBall))
+            {
+                points++;
+            }
 
             Refresh();
         }
@@ -126,8 +139,8 @@ namespace BlockBreaker
             //hero
             e.Graphics.FillRectangle(goldRodBrush, hero.x, hero.y, hero.width, hero.height);
 
-            ////score ball
-            //e.Graphics.FillEllipse(goldRodBrush, chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
+            //score ball
+            e.Graphics.FillEllipse(goldRodBrush, chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
         }
     }
 }
