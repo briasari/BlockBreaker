@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BlockBreaker
 {
@@ -34,6 +35,7 @@ namespace BlockBreaker
 
         public bool Collision(Ball b)
         {
+            
             Rectangle heroRec = new Rectangle(x, y, width, height);
             Rectangle chaseRec = new Rectangle(b.x, b.y, b.size, b.size);
 

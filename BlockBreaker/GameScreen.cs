@@ -18,6 +18,10 @@ namespace BlockBreaker
 
         List<Brick> bricks = new List<Brick>();
 
+        PictureBox[] BlocksArray;
+
+        Brick brick;
+
         Player hero;
 
         public static int screenWidth;
@@ -94,8 +98,14 @@ namespace BlockBreaker
 
             if (hero.Collision(chaseBall))
             {
+                //points++;
+            }
+
+            if (brick.Collision(chaseBall))
+            {
                 points++;
             }
+
 
             Refresh();
         }

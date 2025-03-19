@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BlockBreaker
 {
@@ -19,23 +20,31 @@ namespace BlockBreaker
         }
 
 
-
-
-
-
-
-        public bool Collision(Ball b)
+        public bool Break(Ball b)
         {
-            Rectangle blockRec = new Rectangle(x, y, width, height);
+            Rectangle heroRec = new Rectangle(x, y, width, height);
             Rectangle chaseRec = new Rectangle(b.x, b.y, b.size, b.size);
 
-            if (blockRec.IntersectsWith(chaseRec))
+            if (brick.IntersectsWith(chaseRec))
             {
                 b.ySpeed = -b.ySpeed;
                 return true;
             }
 
+            foreach (Control x in GameScreen.Controls)
+            {
+                if ((string)x.Tag == "block")
+                {
+                    if (chaseRec.IntersectsWith(x.Bounds) && x.Visible == true)
+                    {
+                        GameScreen.points++;
+                        x.Visible = false;
+                    }
+                }
+            }
+
             return false;
         }
+
     }
 }

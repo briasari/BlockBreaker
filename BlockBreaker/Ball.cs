@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BlockBreaker
 {
@@ -30,10 +33,12 @@ namespace BlockBreaker
                 xSpeed = -xSpeed;
             }
 
-            if (y < 0 || y > GameScreen.screenHeight - size)
+            if (y < 0)
             {
                 ySpeed = -ySpeed;
             }
-        }
+
+            
+    }
     }
 }
