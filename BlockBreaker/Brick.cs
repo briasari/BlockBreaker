@@ -11,8 +11,8 @@ namespace BlockBreaker
     internal class Brick
     {
         public int x, y;
-        public int width = 30;
-        public int height = 20;
+        public int width = 100;
+        public int height = 29;
 
         public Brick()
         {
@@ -22,10 +22,10 @@ namespace BlockBreaker
 
         public bool Break(Ball b)
         {
-            Rectangle heroRec = new Rectangle(x, y, width, height);
+            Rectangle brickRec = new Rectangle(x, y, width, height);
             Rectangle chaseRec = new Rectangle(b.x, b.y, b.size, b.size);
 
-            if (brick.IntersectsWith(chaseRec))
+            if (brickRec.IntersectsWith(chaseRec))
             {
                 b.ySpeed = -b.ySpeed;
                 return true;

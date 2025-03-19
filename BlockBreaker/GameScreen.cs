@@ -48,6 +48,8 @@ namespace BlockBreaker
         {
             hero = new Player();
 
+            brick = new Brick();
+
             int x = randGen.Next(20, this.Width - 50);
             int y = randGen.Next(20, this.Height - 50);
 
@@ -101,7 +103,7 @@ namespace BlockBreaker
                 //points++;
             }
 
-            if (brick.Collision(chaseBall))
+            if (brick.Break(chaseBall))
             {
                 points++;
             }
