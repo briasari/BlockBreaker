@@ -168,13 +168,11 @@ namespace BlockBreaker
                 {
                     bricks.Remove(b);
                     chaseBall.ySpeed = - chaseBall.ySpeed;
+                    points++;
                     break;
                 }
             }
-            //if (brick.Break(chaseBall))
-            //{
-            //    points++;
-            //}
+
 
 
             Refresh();
