@@ -11,12 +11,13 @@ namespace BlockBreaker
     internal class Brick
     {
         public int x, y;
-        public int width = 100;
-        public int height = 29;
+        public int width = 75;
+        public int height = 25;
 
-        public Brick()
+        public Brick(int _x, int _y)
         {
-
+            x = _x; 
+            y = _y; 
         }
 
 
@@ -27,20 +28,7 @@ namespace BlockBreaker
 
             if (brickRec.IntersectsWith(chaseRec))
             {
-                b.ySpeed = -b.ySpeed;
                 return true;
-            }
-
-            foreach (Control x in GameScreen.Controls)
-            {
-                if ((string)x.Tag == "block")
-                {
-                    if (chaseRec.IntersectsWith(x.Bounds) && x.Visible == true)
-                    {
-                        GameScreen.points++;
-                        x.Visible = false;
-                    }
-                }
             }
 
             return false;

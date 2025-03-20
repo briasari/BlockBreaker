@@ -16,11 +16,10 @@ namespace BlockBreaker
         List<Ball> balls = new List<Ball>();
         Ball chaseBall;
 
+
+        //public static List<PictureBox> blocks = new List<PictureBox>();
+
         List<Brick> bricks = new List<Brick>();
-
-        PictureBox[] BlocksArray;
-
-        Brick brick;
 
         Player hero;
 
@@ -30,6 +29,11 @@ namespace BlockBreaker
 
         Random randGen = new Random();
         SolidBrush goldRodBrush = new SolidBrush(Color.Goldenrod);
+        SolidBrush darkSalmonBrush = new SolidBrush (Color.DarkSalmon);
+        SolidBrush salmonBrush = new SolidBrush (Color.Salmon);
+        SolidBrush lightSalmonBrush = new SolidBrush(Color.LightSalmon);
+        SolidBrush moccasinBrush = new SolidBrush(Color.Moccasin);
+        SolidBrush cornsilkBrush = new SolidBrush (Color.Cornsilk);
 
 
         public static int points;
@@ -42,18 +46,73 @@ namespace BlockBreaker
             screenHeight = this.Height;
 
             InitializeGame();
+
+            //foreach(Brick brick in bricks)
+            //{
+            //    bricks.Add(brick);
+            //}
         }
 
         public void InitializeGame()
         {
             hero = new Player();
 
-            brick = new Brick();
+            //brick = new Brick();
 
             int x = randGen.Next(20, this.Width - 50);
             int y = randGen.Next(20, this.Height - 50);
 
             chaseBall = new Ball(x, y, 8, 8);
+
+            //foreach (Control c in this.Controls)
+            //{
+            //    if (c is PictureBox)
+            //    {
+            //        blocks.Add(c as PictureBox);
+            //    }
+            //}
+
+            int xValue = 51;
+            int yValue = 60;
+
+            #region generate blocks
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue);
+                bricks.Add(b);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue + 25 + 4);
+                bricks.Add(b);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue + 50 + 8);
+                bricks.Add(b);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue + 75 + 12);
+                bricks.Add(b);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue + 100 + 16);
+                bricks.Add(b);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                Brick b = new Brick(xValue + (80 * i), yValue + 125 + 20);
+                bricks.Add(b);
+            }
+
+            #endregion
 
             for (int i = 0; i < 5; i++)
             {
@@ -103,10 +162,19 @@ namespace BlockBreaker
                 //points++;
             }
 
-            if (brick.Break(chaseBall))
+            foreach (Brick b in bricks)
             {
-                points++;
+                if (b.Break(chaseBall))
+                {
+                    bricks.Remove(b);
+                    chaseBall.ySpeed = - chaseBall.ySpeed;
+                    break;
+                }
             }
+            //if (brick.Break(chaseBall))
+            //{
+            //    points++;
+            //}
 
 
             Refresh();
@@ -145,6 +213,11 @@ namespace BlockBreaker
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            foreach(Brick b in bricks)
+            {
+                e.Graphics.FillRectangle(salmonBrush, b.x, b.y, b.width, b.height);
+            }
+
             //update labels
             pointsLabel.Text = $"points: {points}";
 
