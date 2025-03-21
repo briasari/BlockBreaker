@@ -34,7 +34,7 @@
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(214, 311);
+            this.playButton.Location = new System.Drawing.Point(226, 323);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(200, 50);
             this.playButton.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(497, 578);
+            this.exitButton.Location = new System.Drawing.Point(518, 674);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
             this.exitButton.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
+            this.BackColor = System.Drawing.Color.Salmon;
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
             this.Name = "MainScreen";

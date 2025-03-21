@@ -37,8 +37,6 @@ namespace BlockBreaker
             {
                 ySpeed = -ySpeed;
             }
-
-            
     }
     }
 }

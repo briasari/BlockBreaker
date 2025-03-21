@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace BlockBreaker
 {
@@ -15,9 +16,6 @@ namespace BlockBreaker
     {
         List<Ball> balls = new List<Ball>();
         Ball chaseBall;
-
-
-        //public static List<PictureBox> blocks = new List<PictureBox>();
 
         List<Brick> bricks = new List<Brick>();
 
@@ -35,8 +33,12 @@ namespace BlockBreaker
         SolidBrush moccasinBrush = new SolidBrush(Color.Moccasin);
         SolidBrush cornsilkBrush = new SolidBrush (Color.Cornsilk);
 
+        SoundPlayer hitPlayer = new SoundPlayer(Properties.Resources.hitSound);
+        SoundPlayer breakPlayer = new SoundPlayer(Properties.Resources.breakSound);
+
 
         public static int points;
+        public static int bounces;
 
         public GameScreen()
         {
@@ -46,31 +48,22 @@ namespace BlockBreaker
             screenHeight = this.Height;
 
             InitializeGame();
-
-            //foreach(Brick brick in bricks)
-            //{
-            //    bricks.Add(brick);
-            //}
         }
 
         public void InitializeGame()
         {
+            points = 0;
+            bounces = 0;
+
+            gameTimer.Start();
+
             hero = new Player();
 
-            //brick = new Brick();
-
-            int x = randGen.Next(20, this.Width - 50);
-            int y = randGen.Next(20, this.Height - 50);
+            int x = randGen.Next(200, this.Width - 200);
+            int y = randGen.Next(200, this.Height - 200);
 
             chaseBall = new Ball(x, y, 8, 8);
 
-            //foreach (Control c in this.Controls)
-            //{
-            //    if (c is PictureBox)
-            //    {
-            //        blocks.Add(c as PictureBox);
-            //    }
-            //}
 
             int xValue = 51;
             int yValue = 60;
@@ -128,7 +121,7 @@ namespace BlockBreaker
         private void CreateBall()
         {
             int x = this.Width;
-            int y = randGen.Next(200, this.Height - 335);
+            int y = randGen.Next(200, this.Height - 370);
 
             Ball b = new Ball(x, y, 8, 8);
             balls.Add(b);
@@ -157,15 +150,19 @@ namespace BlockBreaker
 
             #endregion
 
+            //hero and ball collision
             if (hero.Collision(chaseBall))
             {
-                //points++;
+                hitPlayer.Play();
+                bounces++;
             }
 
+            //make bricks
             foreach (Brick b in bricks)
             {
                 if (b.Break(chaseBall))
                 {
+                    breakPlayer.Play();
                     bricks.Remove(b);
                     chaseBall.ySpeed = - chaseBall.ySpeed;
                     points++;
@@ -173,7 +170,24 @@ namespace BlockBreaker
                 }
             }
 
+            //check for win
+            if(points == 30)
+            {
+                gameOverLabel.Visible = true;
+                gameOverLabel.Text = "game over\nyou won!";
+                menuButton.Visible = true;
+                gameTimer.Stop();
+            }
 
+            //check if ball went out of bounds (lost)
+            if(chaseBall.y > screenHeight)
+            {
+                gameOverLabel.Visible = true;
+                gameOverLabel.Text = "game over\nyou lost";
+                menuButton.Visible = true;
+                gameTimer.Stop();
+                
+            }
 
             Refresh();
         }
@@ -209,6 +223,11 @@ namespace BlockBreaker
             }
         }
 
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new MainScreen());
+        }
+
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             foreach(Brick b in bricks)
@@ -218,6 +237,7 @@ namespace BlockBreaker
 
             //update labels
             pointsLabel.Text = $"points: {points}";
+            label1.Text = $"bounces: {bounces}";
 
             //hero
             e.Graphics.FillRectangle(goldRodBrush, hero.x, hero.y, hero.width, hero.height);
