@@ -121,7 +121,7 @@ namespace BlockBreaker
         private void CreateBall()
         {
             int x = this.Width;
-            int y = randGen.Next(200, this.Height - 370);
+            int y = randGen.Next(205, this.Height - 365);
 
             Ball b = new Ball(x, y, 8, 8);
             balls.Add(b);
